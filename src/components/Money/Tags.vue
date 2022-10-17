@@ -1,10 +1,10 @@
 <template>
   <div class="tags">
     <div class="new">
-      <button>新增标签</button>
+      <button @click="create">新增标签</button>
     </div>
     <ul class="current">
-      <li v-for="tag in dataSource" :key="tag"
+      <li v-for="tag in tags" :key="tag"
           :class="{selected: selectedTags.indexOf(tag)>=0}"
           @click="toggle(tag)">{{ tag }}
       </li>
@@ -18,7 +18,7 @@ import {Component, Prop} from 'vue-property-decorator';
 
 @Component
 export default class Types extends Vue {
-  @Prop(Array) dataSource: string[] | undefined;
+  @Prop(Array) readonly tags: string[] | undefined;
   selectedTags: string[] = [];
 
   toggle(tag: string) {
@@ -28,7 +28,16 @@ export default class Types extends Vue {
     } else {
       this.selectedTags.push(tag);
     }
+    this.$emit('update:selectedTags', this.selectedTags);
+  }
 
+  create() {
+    const name = window.prompt('请输入标签名');
+    if (name === '') {
+      window.alert('标签名不能为空');
+    } else if (this.tags) {
+      this.$emit('update:tags', [...this.tags, name]);
+    }
   }
 }
 </script>
