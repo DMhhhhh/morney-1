@@ -26,7 +26,7 @@ const routes: Array<RouteConfig> = [
     component: Statistics
   },
   {
-    path:'/edit',
+    path:'/edit/:id',
     component: EditItem
   },
   {
