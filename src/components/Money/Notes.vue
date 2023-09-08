@@ -1,8 +1,10 @@
 <template>
   <label class="notes">
     <span class="name">备注</span>
-    <input :value="notes" @input="onInput"
-           type="text" placeholder="在这里输入备注">
+    <input :value="notes"
+           @input="onInput"
+           type="text"
+           :placeholder="this.placeholder">
   </label>
 </template>
 
@@ -13,8 +15,9 @@ import {Component, Prop} from 'vue-property-decorator';
 @Component
 export default class Types extends Vue {
   @Prop(String) readonly notes!: string;
+  @Prop() placeholder?: string;
 
-  onInput(e:Event) {
+  onInput(e: Event) {
     const notes = (e.target as HTMLInputElement).value;
     this.$emit('update:notes', notes);
   }

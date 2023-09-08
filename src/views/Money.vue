@@ -2,7 +2,8 @@
   <Layout class-prefix="layout">
     <NumberPad :amount.sync="record.amount" @submit="saveRecord"></NumberPad>
     <Types :type.sync="record.type"></Types>
-    <Notes :notes.sync="record.notes"></Notes>
+    <Notes :notes.sync="record.notes"
+           placeholder="请输入备注"></Notes>
     <Tags :selectedTags.sync="record.selectedTags"
           :tags.sync="tags"></Tags>
   </Layout>
@@ -19,7 +20,7 @@ import recordListModel from '@/models/recordListModel';
 import tagListModel from '@/models/tagListModel';
 
 const recordList = recordListModel.fetch();
-const tagList = tagListModel.fetch()
+const tagList = tagListModel.fetch();
 
 @Component({
   components: {Tags, Notes, Types, NumberPad}
