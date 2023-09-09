@@ -1,10 +1,18 @@
 <template>
   <Layout>
-    <Icon name="left"></Icon>
-    <span>编辑标签</span>
-    <Notes
-      placeholder="请输入标签名"></Notes>
-    <CommonButton>删除标签</CommonButton>
+    <div class="navBar">
+      <Icon class="leftIcon" name="left"></Icon>
+      <span class="title">编辑标签</span>
+      <span class="rightIcon"></span>
+    </div>
+    <div class="form-wrapper">
+      <FormItem
+        placeholder="请输入标签名" field-name="标签名">
+      </FormItem>
+    </div>
+    <div class="button-wrapper">
+      <CommonButton>删除标签</CommonButton>
+    </div>
   </Layout>
 </template>
 
@@ -16,7 +24,7 @@ import FormItem from '@/components/Money/FormItem.vue';
 import CommonButton from '@/components/Money/CommonButton.vue';
 
 @Component({
-  components: {CommonButton, Notes: FormItem}
+  components: {FormItem, CommonButton}
 })
 export default class EditItem extends Vue {
   created() {
@@ -34,5 +42,38 @@ export default class EditItem extends Vue {
 </script>
 
 <style lang="scss" scoped>
+.navBar {
+  text-align: center;
+  font-size: 16px;
+  padding: 12px 16px;
+  background: white;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 
+  > .title {
+
+  }
+
+  > .leftIcon {
+    width: 18px;
+    height: 18px;
+  }
+
+  > .rightIcon {
+    width: 18px;
+    height: 18px;
+  }
+}
+
+.form-wrapper {
+  background: white;
+  margin-top: 8px;
+}
+
+.button-wrapper {
+  text-align: center;
+  padding: 16px;
+  margin-top: 28px;
+}
 </style>

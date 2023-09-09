@@ -8,9 +8,9 @@
           <span>{{ tag.name }}</span>
           <Icon name="right"></Icon>
         </router-link>
-        <div class="createTag-wrapper">
-          <CommonButton class="createTag" @click.native="createTag">新建标签</CommonButton>
-        </div>
+      </div>
+      <div class="createTag-wrapper">
+        <CommonButton class="createTag" @click.native="createTag">新建标签</CommonButton>
       </div>
     </layout>
   </div>
@@ -66,13 +66,6 @@ export default class Labels extends Vue {
 }
 
 .createTag {
-  background: #767676;
-  color: white;
-  border-radius: 4px;
-  border: none;
-  height: 40px;
-  padding: 0 16px;
-
   &-wrapper {
     text-align: center;
     padding: 16px;

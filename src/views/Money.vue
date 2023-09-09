@@ -2,8 +2,10 @@
   <Layout class-prefix="layout">
     <NumberPad :amount.sync="record.amount" @submit="saveRecord"></NumberPad>
     <Types :type.sync="record.type"></Types>
-    <FormItem :notes.sync="record.notes"
-              placeholder="请输入备注"></FormItem>
+    <div class="form-wrapper">
+      <FormItem :notes.sync="record.notes"
+                placeholder="请输入备注" fieldName="备注"></FormItem>
+    </div>
     <Tags :selectedTags.sync="record.selectedTags"
           :tags.sync="tags"></Tags>
   </Layout>
@@ -49,5 +51,9 @@ export default class Money extends Vue {
 .layout-content {
   display: flex;
   flex-direction: column-reverse;
+}
+
+.form-wrapper {
+  padding: 12px 0;
 }
 </style>
