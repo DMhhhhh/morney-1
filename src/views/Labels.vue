@@ -3,13 +3,13 @@
     <layout>
       <div class="tags">
         <router-link class="tag"
-          v-for="tag in tags" :key="tag.id"
-          :to="`/labels/edit/${tag.id}`">
+                     v-for="tag in tags" :key="tag.id"
+                     :to="`/labels/edit/${tag.id}`">
           <span>{{ tag.name }}</span>
           <Icon name="right"></Icon>
         </router-link>
         <div class="createTag-wrapper">
-          <button class="createTag" @click="createTag">新建标签</button>
+          <CommonButton class="createTag" @click.native="createTag">新建标签</CommonButton>
         </div>
       </div>
     </layout>
@@ -20,9 +20,12 @@
 import Vue from 'vue';
 import {Component} from 'vue-property-decorator';
 import tagListModel from '@/models/tagListModel';
+import CommonButton from '@/components/Money/CommonButton.vue';
 
 tagListModel.fetch();
-@Component
+@Component({
+  components: {CommonButton}
+})
 export default class Labels extends Vue {
   tags = tagListModel.tag;
 
@@ -30,10 +33,10 @@ export default class Labels extends Vue {
     const name = window.prompt('请输入标签名');
     if (name) {
       const message = tagListModel.create(name);
-      if(message === 'success'){
-        alert('标签创建成功')
-      }else if(message === 'duplicated'){
-        alert('标签名重复，创建标签失败')
+      if (message === 'success') {
+        alert('标签创建成功');
+      } else if (message === 'duplicated') {
+        alert('标签名重复，创建标签失败');
       }
     }
   }
