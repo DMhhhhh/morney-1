@@ -7,7 +7,7 @@
     </div>
     <div class="form-wrapper">
       <FormItem
-        placeholder="请输入标签名" field-name="标签名">
+        placeholder="请输入标签名" fieldName="标签名" :notes="tag.name">
       </FormItem>
     </div>
     <div class="button-wrapper">
@@ -27,13 +27,15 @@ import CommonButton from '@/components/Money/CommonButton.vue';
   components: {FormItem, CommonButton}
 })
 export default class EditItem extends Vue {
+  tag?: { id: string, name: string } = undefined;
+
   created() {
     const id = this.$route.params.id;
     tagListModel.fetch;
     const tags = tagListModel.tag;
-    const tag = tags.find(tags => tags.id === id);
+    const tag = tags.filter(tags => tags.id === id)[0];
     if (tag) {
-      console.log(id);
+      this.tag = tag
     } else {
       this.$router.replace('/404');
     }
