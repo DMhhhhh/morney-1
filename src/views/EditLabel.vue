@@ -50,6 +50,7 @@ export default class EditItem extends Vue {
   remove() {
     if (this.tag) {
       tagListModel.remove(this.tag.id);
+      this.$router.back();
     }
   }
 
