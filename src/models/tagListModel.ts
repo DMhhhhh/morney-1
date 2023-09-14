@@ -8,6 +8,7 @@ type TagListModel = {
   fetch: () => Tag[]
   create: (name: string) => 'success' | 'duplicated'
   save: () => void
+  update: (id: string, name: string) => 'success' | 'not found' | 'duplicated'
 }
 const tagListModel: TagListModel = {
   tag: [],
@@ -24,6 +25,22 @@ const tagListModel: TagListModel = {
   },
   save() {
     window.localStorage.setItem(localstorageTagName, JSON.stringify(this.tag));
+  },
+  update(id, name) {
+    const idList = this.tag.map(item => item.id);
+    if (idList.indexOf(id) >= 0) {
+      const nameList = this.tag.map((item => item.name));
+      if (nameList.indexOf(name) >= 0) {
+        return 'duplicated';
+      } else {
+        const tag = this.tag.filter(item => item.id === id)[0];
+        tag.name = name;
+        this.save();
+        return 'success';
+      }
+    } else {
+      return 'not found';
+    }
   }
 };
 

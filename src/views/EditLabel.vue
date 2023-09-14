@@ -7,7 +7,7 @@
     </div>
     <div class="form-wrapper">
       <FormItem
-        placeholder="请输入标签名" fieldName="标签名" :notes="tag.name">
+        placeholder="请输入标签名" fieldName="标签名" :notes="tag.name" @update:notes="updateTag">
       </FormItem>
     </div>
     <div class="button-wrapper">
@@ -35,9 +35,15 @@ export default class EditItem extends Vue {
     const tags = tagListModel.tag;
     const tag = tags.filter(tags => tags.id === id)[0];
     if (tag) {
-      this.tag = tag
+      this.tag = tag;
     } else {
       this.$router.replace('/404');
+    }
+  }
+
+  updateTag(name: string) {
+    if (this.tag) {
+      tagListModel.update(this.tag.id, name);
     }
   }
 }
