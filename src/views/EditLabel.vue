@@ -1,7 +1,7 @@
 <template>
   <Layout>
     <div class="navBar">
-      <Icon class="leftIcon" name="left"></Icon>
+      <Icon @click.native="goBack" class="leftIcon" name="left"></Icon>
       <span class="title">编辑标签</span>
       <span class="rightIcon"></span>
     </div>
@@ -48,7 +48,13 @@ export default class EditItem extends Vue {
   }
 
   remove() {
-    tagListModel.remove(this.tag.id);
+    if (this.tag) {
+      tagListModel.remove(this.tag.id);
+    }
+  }
+
+  goBack() {
+    this.$router.back();
   }
 }
 </script>
