@@ -11,7 +11,7 @@
       </FormItem>
     </div>
     <div class="button-wrapper">
-      <CommonButton>删除标签</CommonButton>
+      <CommonButton @click.native="remove">删除标签</CommonButton>
     </div>
   </Layout>
 </template>
@@ -45,6 +45,10 @@ export default class EditItem extends Vue {
     if (this.tag) {
       tagListModel.update(this.tag.id, name);
     }
+  }
+
+  remove() {
+    tagListModel.remove(this.tag.id);
   }
 }
 </script>

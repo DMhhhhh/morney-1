@@ -9,6 +9,7 @@ type TagListModel = {
   create: (name: string) => 'success' | 'duplicated'
   save: () => void
   update: (id: string, name: string) => 'success' | 'not found' | 'duplicated'
+  remove: (id: string) => void
 }
 const tagListModel: TagListModel = {
   tag: [],
@@ -41,6 +42,12 @@ const tagListModel: TagListModel = {
     } else {
       return 'not found';
     }
+  },
+  remove(id) {
+    const idList = this.tag.map(item => item.id);
+    const index = idList.indexOf(id);
+    this.tag.splice(index, 1);
+    this.save();
   }
 };
 
