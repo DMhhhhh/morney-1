@@ -15,6 +15,7 @@ Vue.component('Layout', Layout);
 Vue.component('Icon', Icon);
 
 window.tagList = tagListModel.fetch();
+
 window.createTag = (name) => {
   if (name) {
     const message = tagListModel.create(name);
@@ -25,19 +26,19 @@ window.createTag = (name) => {
     }
   }
 };
-window.removeTag = ();
-{
-
-}
-window.removeTag = ();
-{
-
-}
-window.findTag = ();
-{
-
-}
-
+window.removeTag = (id) => {
+  if (id) {
+    return tagListModel.remove(id);
+  }
+};
+window.updateTag = (id, name) => {
+  if (id) {
+    return tagListModel.update(id, name);
+  }
+};
+window.findTag = (id) => {
+  return window.tagList.filter(tags => tags.id === id)[0];
+};
 
 new Vue({
   router,

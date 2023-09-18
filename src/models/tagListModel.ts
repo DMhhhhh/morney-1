@@ -1,7 +1,6 @@
 import createId from '@/lib/creatId';
 
 const localstorageTagName = 'tagList';
-
 const tagListModel: TagListModel = {
   tag: [],
   fetch() {

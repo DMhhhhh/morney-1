@@ -27,6 +27,7 @@ const recordList = recordListModel.fetch();
 })
 export default class Money extends Vue {
   tags = window.tagList.map(item => item.name);
+  recordList2?: RecordItem[] = undefined
   recordList: RecordItem[] = recordList;
   record: RecordItem = {
     selectedTags: [], notes: '', type: '-', amount: 0//amount值会受numberPad内ok函数修改

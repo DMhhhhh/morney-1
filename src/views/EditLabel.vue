@@ -19,7 +19,6 @@
 <script lang="ts">
 import Vue from 'vue';
 import {Component} from 'vue-property-decorator';
-import tagListModel from '@/models/tagListModel';
 import FormItem from '@/components/Money/FormItem.vue';
 import CommonButton from '@/components/Money/CommonButton.vue';
 
@@ -30,26 +29,24 @@ export default class EditItem extends Vue {
   tag?: { id: string, name: string } = undefined;
 
   created() {
-    const id = this.$route.params.id;
-    const tags = window.tagList;
-    const tag = tags.filter(tags => tags.id === id)[0];
-    if (tag) {
-      this.tag = tag;
-    } else {
+    this.tag = window.findTag(this.$route.params.id);
+    if (!this.tag) {
       this.$router.replace('/404');
     }
   }
 
   updateTag(name: string) {
     if (this.tag) {
-      tagListModel.update(this.tag.id, name);
+      window.updateTag(this.tag.id, name);//搞不懂这个name如何获取的
     }
   }
 
   remove() {
     if (this.tag) {
-      tagListModel.remove(this.tag.id);
+      window.removeTag(this.tag.id);
       this.$router.back();
+    } else {
+      window.alert('删除失败');
     }
   }
 

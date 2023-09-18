@@ -16,9 +16,6 @@ const recordListModel = {
   save() {
     window.localStorage.setItem(localstorageKeyName, JSON.stringify(this.data));
   },
-  // update() {
-  //
-  // }
 };
 
 export default recordListModel;

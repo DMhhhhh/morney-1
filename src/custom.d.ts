@@ -5,7 +5,6 @@ type RecordItem = {
   amount: number
   createdAt?: Date
 }
-
 type Tag = {
   id: string,
   name: string
@@ -22,4 +21,7 @@ type TagListModel = {
 interface Window {
   tagList: Tag[];
   createTag: (name: string) => void;
+  removeTag: TagListModel['remove'];
+  updateTag: TagListModel['update'];
+  findTag: (id: string) => Tag | undefined;
 }
