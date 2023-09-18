@@ -19,16 +19,14 @@ import Tags from '@/components/Money/Tags.vue';
 import Vue from 'vue';
 import {Component, Watch} from 'vue-property-decorator';
 import recordListModel from '@/models/recordListModel';
-import tagListModel from '@/models/tagListModel';
 
 const recordList = recordListModel.fetch();
-const tagList = tagListModel.fetch();
 
 @Component({
   components: {FormItem, Tags, Types, NumberPad}
 })
 export default class Money extends Vue {
-  tags = tagList.map(item => item.name);
+  tags = window.tagList.map(item => item.name);
   recordList: RecordItem[] = recordList;
   record: RecordItem = {
     selectedTags: [], notes: '', type: '-', amount: 0//amount值会受numberPad内ok函数修改

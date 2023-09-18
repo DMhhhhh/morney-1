@@ -22,12 +22,11 @@ import {Component} from 'vue-property-decorator';
 import tagListModel from '@/models/tagListModel';
 import CommonButton from '@/components/Money/CommonButton.vue';
 
-tagListModel.fetch();
 @Component({
   components: {CommonButton}
 })
 export default class Labels extends Vue {
-  tags = tagListModel.tag;
+  tags = window.tagList;
 
   createTag() {
     const name = window.prompt('请输入标签名');

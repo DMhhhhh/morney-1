@@ -31,8 +31,7 @@ export default class EditItem extends Vue {
 
   created() {
     const id = this.$route.params.id;
-    tagListModel.fetch;
-    const tags = tagListModel.tag;
+    const tags = window.tagList;
     const tag = tags.filter(tags => tags.id === id)[0];
     if (tag) {
       this.tag = tag;
