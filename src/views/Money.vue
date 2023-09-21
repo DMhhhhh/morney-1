@@ -6,8 +6,7 @@
       <FormItem :notes.sync="record.notes"
                 placeholder="请输入备注" fieldName="备注"></FormItem>
     </div>
-    <Tags :selectedTags.sync="record.selectedTags"
-          :tags.sync="tags"></Tags>
+    <Tags :selectedTags.sync="record.selectedTags"></Tags>
   </Layout>
 </template>
 
@@ -30,7 +29,7 @@ export default class Money extends Vue {
     selectedTags: [], notes: '', type: '-', amount: 0//amount值会受numberPad内ok函数修改
   };
 
-  saveRecord() {
+  saveRecord(): void {
     store.createRecord(this.record);
   }
 }

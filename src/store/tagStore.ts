@@ -5,12 +5,12 @@ const localstorageTagName = 'tagList';
 const tagStore = {
   //tag.store
   tagList: [] as Tag[],
-  fetchTag() {
+  fetchTag(): Tag[] {
     this.tagList = JSON.parse(window.localStorage.getItem(localstorageTagName) || '[]');
     return this.tagList;
   },
-  createTag(name: string) {
-    const names = this.tagList.map((item: { name: any; }) => item.name);
+  createTag(name: string): string {
+    const names = this.tagList.map((item) => item.name);
     if (names.indexOf(name) >= 0) {
       alert('标签名重复，创建标签失败');
       return 'duplicated';
@@ -27,9 +27,10 @@ const tagStore = {
       const index = idList.indexOf(id);
       this.tagList.splice(index, 1);
       this.saveTag();
+      return true;
     }
   },
-  updateTag(id: string, name: string) {
+  updateTag(id: string, name: string): string {
     const idList = this.tagList.map(item => item.id);
     if (idList.indexOf(id) >= 0) {
       const nameList = this.tagList.map((item => item.name));
@@ -45,10 +46,10 @@ const tagStore = {
       return 'not found';
     }
   },
-  findTag(id: string) {
+  findTag(id: string): Tag {
     return this.tagList.filter((tags: { id: string; }) => tags.id === id)[0];
   },
-  saveTag() {
+  saveTag(): void {
     window.localStorage.setItem(localstorageTagName, JSON.stringify(this.tagList));
   }
 };

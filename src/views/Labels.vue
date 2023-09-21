@@ -28,9 +28,11 @@ import store from '@/store/index2';
 export default class Labels extends Vue {
   tags = store.tagList;
 
-  createTag() {
+  createTag(): void {
     const name = window.prompt('请输入标签名');
-    if (name) {
+    if (!name) {
+      window.alert('标签名不能为空');
+    } else {
       store.createTag(name);
     }
   }
