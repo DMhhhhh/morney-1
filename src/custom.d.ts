@@ -17,13 +17,3 @@ type TagListModel = {
   update: (id: string, name: string) => 'success' | 'not found' | 'duplicated'
   remove: (id: string) => void
 }
-
-interface Window {
-  tagList: Tag[];
-  createTag: (name: string) => void;
-  removeTag: TagListModel['remove'];
-  updateTag: TagListModel['update'];
-  findTag: (id: string) => Tag | undefined;
-  recordList: RecordItem[];
-  createRecord: (record: RecordItem) => void;
-}

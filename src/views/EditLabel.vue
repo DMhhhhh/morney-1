@@ -21,15 +21,16 @@ import Vue from 'vue';
 import {Component} from 'vue-property-decorator';
 import FormItem from '@/components/Money/FormItem.vue';
 import CommonButton from '@/components/Money/CommonButton.vue';
+import store from '@/store/index2';
 
 @Component({
   components: {FormItem, CommonButton}
 })
 export default class EditItem extends Vue {
-  tag?: { id: string, name: string } = undefined;
+  tag?: { id: string, name: string } = {id: '', name: ''};
 
   created() {
-    this.tag = window.findTag(this.$route.params.id);
+    this.tag = store.findTag(this.$route.params.id);
     if (!this.tag) {
       this.$router.replace('/404');
     }
@@ -37,13 +38,13 @@ export default class EditItem extends Vue {
 
   updateTag(name: string) {
     if (this.tag) {
-      window.updateTag(this.tag.id, name);//搞不懂这个name如何获取的
+      store.updateTag(this.tag.id, name);//搞不懂这个name如何获取的
     }
   }
 
   remove() {
     if (this.tag) {
-      window.removeTag(this.tag.id);
+      store.removeTag(this.tag.id);
       this.$router.back();
     } else {
       window.alert('删除失败');
