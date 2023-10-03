@@ -17,20 +17,26 @@ import FormItem from '@/components/Money/FormItem.vue';
 import Tags from '@/components/Money/Tags.vue';
 import Vue from 'vue';
 import {Component} from 'vue-property-decorator';
-import store from '@/store/index2';
 
 @Component({
-  components: {FormItem, Tags, Types, NumberPad}
+  components: {FormItem, Tags, Types, NumberPad},
+  computed: {
+    recordList() {
+      return this.$store.state.recordList;
+    }
+  }
 })
 export default class Money extends Vue {
-  tags = store.tagList.map(item => item.name);
-  recordList = store.recordList;
   record: RecordItem = {
     selectedTags: [], notes: '', type: '-', amount: 0//amount值会受numberPad内ok函数修改
   };
 
+  created(): void {
+    this.$store.commit('fetchRecords');
+  }
+
   saveRecord(): void {
-    store.createRecord(this.record);
+    this.$store.commit('createRecord(this.record)');
   }
 }
 </script>

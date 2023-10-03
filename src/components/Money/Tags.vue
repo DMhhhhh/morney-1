@@ -5,8 +5,8 @@
     </div>
     <ul class="current">
       <li v-for="tag in tagList" :key="tag.id"
-          :class="{selected: selectedTags.indexOf(tag.id)>=0}"
-          @click="toggle(tag.id)">{{ tag.name }}
+          :class="{selected: selectedTags.indexOf(tag.name)>=0}"
+          @click="toggle(tag.name)">{{ tag.name }}
       </li>
     </ul>
   </div>
@@ -22,7 +22,7 @@ export default class Types extends Vue {
   selectedTags: string[] = [];
   tagList = store.fetchTag();
 
-  toggle(tag: string) {
+  toggle(tag: string): void {
     const index = this.selectedTags.indexOf(tag);
     if (index >= 0) {
       this.selectedTags.splice(index, 1);
@@ -32,7 +32,7 @@ export default class Types extends Vue {
     this.$emit('update:selectedTags', this.selectedTags);
   }
 
-  create() {
+  create(): void {
     const name = window.prompt('请输入标签名');
     if (!name) {
       window.alert('标签名不能为空');
