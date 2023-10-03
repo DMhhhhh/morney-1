@@ -17,24 +17,21 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue';
-import {Component} from 'vue-property-decorator';
 import CommonButton from '@/components/Money/CommonButton.vue';
-import store from '@/store/index2';
+import Component, {mixins} from 'vue-class-component';
+import {TagHelper} from '@/mixins/TagHelper';
 
 @Component({
-  components: {CommonButton}
-})
-export default class Labels extends Vue {
-  tags = store.tagList;
-
-  createTag(): void {
-    const name = window.prompt('请输入标签名');
-    if (!name) {
-      window.alert('标签名不能为空');
-    } else {
-      store.createTag(name);
+  components: {CommonButton},
+  computed: {
+    tags() {
+      return this.$store.state.tagList;
     }
+  }
+})
+export default class Labels extends mixins(TagHelper) {
+  created() {
+    this.$store.commit('fetchTag');
   }
 }
 </script>
