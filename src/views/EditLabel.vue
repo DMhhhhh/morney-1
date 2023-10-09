@@ -7,7 +7,7 @@
     </div>
     <div class="form-wrapper">
       <FormItem
-        placeholder="请输入标签名" fieldName="标签名" :notes="tag.name" @update:notes="updateTag">
+        placeholder="请输入标签名" fieldName="标签名" :notes="currentTag.name" @update:notes="updateTag">
       </FormItem>
     </div>
     <div class="button-wrapper">
@@ -26,30 +26,28 @@ import CommonButton from '@/components/Money/CommonButton.vue';
   components: {FormItem, CommonButton},
 })
 export default class EditItem extends Vue {
-  get tag() {
+  get currentTag() {
     return this.$store.state.currentTag;
+    // 尝试getter写法会不会缓存
   }
 
   created() {
+    this.$store.commit('fetchTag')
     this.$store.commit('setCurrentTag', this.$route.params.id);
-    if (!this.tag) {
+    if (!this.currentTag) {
       this.$router.replace('/404');
     }
   }
 
   updateTag(name: string) {
-    if (this.tag) {
-      this.$store.commit('updateTag', {id: this.tag.id, name});//搞不懂这个name如何获取的
-      console.log(this.tag);
+    if (this.currentTag) {
+      this.$store.commit('updateTag', {id: this.currentTag.id, name});//搞不懂这个name如何获取的
     }
   }
 
   remove() {
-    if (this.tag) {
-      this.$store.commit('removeTag', this.tag.id);
-      this.$router.back();
-    } else {
-      window.alert('删除失败');
+    if (this.currentTag) {
+      this.$store.commit('removeTag', this.currentTag.id);
     }
   }
 
