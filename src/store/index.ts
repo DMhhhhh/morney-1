@@ -9,6 +9,7 @@ const store = new Vuex.Store({
   state: {
     recordList: [] as RecordItem[],
     tagList: [] as Tag[],
+    currentTag: {} as Tag,
   },
   mutations: {
     //Record
@@ -69,11 +70,11 @@ const store = new Vuex.Store({
         return 'not found';
       }
     },
-    findTag(state, id: string): Tag {
-      return state.tagList.filter((tags: { id: string; }) => tags.id === id)[0];
-    },
     saveTag(state): void {
       window.localStorage.setItem('tagList', JSON.stringify(state.tagList));
+    },
+    setCurrentTag(state, id: string) {
+      state.currentTag = state.tagList.filter(t => t.id === id)[0];
     }
   },
   actions: {},
